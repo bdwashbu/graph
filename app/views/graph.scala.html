@@ -1,13 +1,27 @@
 @(dir: String)
 
-<ul class="jqueryFileTree" style="display: none;">
+@import java.io.File
 
-@for((finalDir, file) <- Application.getDirs(dir)) {
-	<li class="directory collapsed"><a href="#" rel=@{finalDir + file}/>@file</a></li>
+@display(file: File) = {
+  @if(file.isDirectory) {
+  	<li>@file.getName
+    <ul>
+    @for(child <- Option(file.listFiles).getOrElse(Array())) {
+		@display(child)
+	}
+    </ul>
+    </li>
+  } else {
+  	<li>@file.getName</li>
+  }
 }
 
-@for((ext, finalDir, file) <- Application.getFiles(dir)) {
-	<li class="file ext_@ext"/><a href="#" rel=@{finalDir + file}\>@file</a></li>
+<ul id="menu">
+
+@for(child <- Option(new File(dir).listFiles).getOrElse(Array()).partition{_.isDirectory}._1 ++
+	Option(new File(dir).listFiles).getOrElse(Array()).partition{_.isDirectory}._2
+) {
+	@display(child)
 }
 
 </ul>

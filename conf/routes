@@ -3,7 +3,6 @@
 # ~~~~
 
 GET     /                           controllers.Application.main
-POST    /							controllers.Application.getList
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /javascripts/*file      controllers.Assets.at(path="/public/javascripts", file)

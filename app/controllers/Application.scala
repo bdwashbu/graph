@@ -18,11 +18,10 @@ object Application extends Controller {
     "dir" -> text
   )
   
-  def getList = Action { implicit request =>
-    val (dir) = userForm.bindFromRequest.get
-    println("HEEEERE")
-    Ok(views.html.graph(dir))
-    //Ok("GOT POST: " + dir)
+  def getList(dirName: String) = {
+    val dir = new File(dirName)
+    println(dir.getAbsolutePath)
+    views.html.graph(dirName)
   }
 
   def getDirs(dir: String): List[(String, String)] = {
