@@ -128,41 +128,43 @@
 				points: { radius: 4, fillColor: '#77b7c5' }
 			}
 		];
-	
+
+		var test = {
+				series: {
+					points: {
+						show: true,
+						radius: 5
+					},
+					lines: {
+						show: true
+					},
+					shadowSize: 1
+				},
+				grid: {
+					color: '#646464',
+					borderColor: '#AAAAAA',
+					backgroundColor: { colors: [ "#fff", "#eee" ] },
+					borderWidth: {
+						top: 1,
+						right: 1,
+						bottom: 2,
+						left: 2
+					},
+					hoverable: true
+				},
+				xaxis: {
+					tickColor: '#DDDDDD',
+					tickDecimals: 2,
+					tickSize: 1
+				},
+				yaxis: {
+					ticks: 10,
+					tickColor: '#DDDDDD'
+				}
+			};
+		
 		// Lines Graph #############################################
-		$.plot($('#graph-lines'), graphData, {
-			series: {
-				points: {
-					show: true,
-					radius: 5
-				},
-				lines: {
-					show: true
-				},
-				shadowSize: 1
-			},
-			grid: {
-				color: '#646464',
-				borderColor: '#AAAAAA',
-				backgroundColor: { colors: [ "#fff", "#eee" ] },
-				borderWidth: {
-					top: 1,
-					right: 1,
-					bottom: 2,
-					left: 2
-				},
-				hoverable: true
-			},
-			xaxis: {
-				tickColor: '#DDDDDD',
-				tickDecimals: 2,
-				tickSize: 1
-			},
-			yaxis: {
-				tickSize: 200,
-				tickColor: '#DDDDDD'
-			}
-		});
+		$.plot($('#graph-lines'), graphData, test);
 	
 		// Bars Graph ##############################################
 		$.plot($('#graph-bars'), graphData, {
@@ -190,31 +192,7 @@
 		});
 		
 		// Lines Graph #############################################
-		$.plot($('#graph-lines2'), graphData2, {
-			series: {
-				points: {
-					show: true,
-					radius: 5
-				},
-				lines: {
-					show: true
-				},
-				shadowSize: 0
-			},
-			grid: {
-				color: '#646464',
-				borderColor: 'transparent',
-				borderWidth: 20,
-				hoverable: true
-			},
-			xaxis: {
-				tickColor: 'transparent',
-				tickDecimals: 2
-			},
-			yaxis: {
-				tickSize: 20
-			}
-		});
+		$.plot($('#graph-lines2'), graphData2, test);
 	
 		// Bars Graph ##############################################
 		$.plot($('#graph-bars2'), graphData2, {
