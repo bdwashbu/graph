@@ -4,6 +4,7 @@ project/target
 target
 tmp
 .history
+.cache
 dist
 /.idea
 /*.iml
@@ -15,4 +16,4 @@ dist
 /.settings
 /bin/
 /app/assets/mops
-/.cache
+
