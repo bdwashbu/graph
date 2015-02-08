@@ -11,8 +11,7 @@
 	
 		<title>How to create an Interactive Graph using CSS3 & jQuery</title>
 	
-		<style>html,body{height:140%}body{background:#f2f2f2 url('img/header.png') no-repeat center top;min-height: 700px;-webkit-box-shadow:inset 0 0 0 5px #f2f2f2,inset 0 0 0 10px #90c0aa,inset 0 0 0 15px #f2f2f2;-mox-box-shadow:inset 0 0 0 5px #f2f2f2,inset 0 0 0 10px #90c0aa,inset 0 0 0 15px #f2f2f2;box-shadow:inset 0 0 0 5px #f2f2f2,inset 0 0 0 10px #90c0aa,inset 0 0 0 15px #f2f2f2;margin:0}#graph-wrapper{width:640px;margin:0 auto;padding-top:275px}</style>
-	
+		
 		<style type="text/css">
 				BODY,
 				HTML {
@@ -39,9 +38,16 @@
 					margin: 0px 0px 10px 0px;
 				}
 	
+	#graph-wrapper{width:640px; float:left; padding-left:50px; padding-top: 50px}
+	
 				.example {
 					float: left;
 					margin: 15px;
+				}
+				
+				#left {
+					float: left;
+					width: 400px;
 				}
 	
 				.demo {
@@ -56,7 +62,7 @@
 					padding: 5px;
 				}
 				
-				.ui-menu { width: 350px; }
+				.ui-menu { float: left; }
 	
 			</style>
 
@@ -85,8 +91,6 @@
 	
 	<body>
 	
-	@index(text = "Welcome to graphing!")
-
 	<script type="text/javascript">
 
 	$(document).ready(function () {
@@ -291,48 +295,17 @@
 	
 	});
 	</script>
-
-	<script src="javascripts/jquery.jdMenu.js" type="text/javascript"></script>
 	
-	
-	
+	<div id="outmost">
+	<div id="left">
+	    	@Application.getList("app/assets/mops")
+	    </div>
+	    
+		<div id="graph-wrapper">
+			@index(text = "Welcome to graphing!")
+		</div>
 
-	<!--  <ul id="menu">
-  <li class="ui-state-disabled">Aberdeen</li>
-  <li>Ada</li>
-  <li>Adamsville</li>
-  <li>Addyston</li>
-  <li>Delphi
-    <ul>
-      <li class="ui-state-disabled">Ada</li>
-      <li>Saarland</li>
-      <li>Salzburg an der schönen Donau</li>
-    </ul>
-  </li>
-  <li>Saarland</li>
-  <li>Salzburg
-    <ul>
-      <li>Delphi
-        <ul>
-          <li>Ada</li>
-          <li>Saarland</li>
-          <li>Salzburg</li>
-        </ul>
-      </li>
-      <li>Delphi
-        <ul>
-          <li>Ada</li>
-          <li>Saarland</li>
-          <li>Salzburg</li>
-        </ul>
-      </li>
-      <li>Perch</li>
-    </ul>
-  </li>
-  <li class="ui-state-disabled">Amesville</li>
-</ul> -->
-
-@Application.getList("app/assets/mops")
+	</div>
 
 
 
