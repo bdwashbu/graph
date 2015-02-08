@@ -54,10 +54,10 @@
 				.demo {
 					width: 200px;
 					height: 400px;
-					border-top: solid 1px #DDD;
-					border-left: solid 1px #DDD;
-					border-bottom: solid 1px #DDD;
-					border-right: solid 1px #DDD;
+					border-top: solid 1px #AAA;
+					border-left: solid 1px #AAA;
+					border-bottom: solid 1px #AAA;
+					border-right: solid 1px #AAA;
 					background: #FFF;
 					overflow: scroll;
 					padding: 5px;
@@ -125,20 +125,28 @@
 				lines: {
 					show: true
 				},
-				shadowSize: 0
+				shadowSize: 1
 			},
 			grid: {
 				color: '#646464',
-				borderColor: 'transparent',
-				borderWidth: 20,
+				borderColor: '#AAAAAA',
+				backgroundColor: { colors: [ "#fff", "#eee" ] },
+				borderWidth: {
+					top: 1,
+					right: 1,
+					bottom: 2,
+					left: 2
+				},
 				hoverable: true
 			},
 			xaxis: {
-				tickColor: 'transparent',
-				tickDecimals: 2
+				tickColor: '#DDDDDD',
+				tickDecimals: 2,
+				tickSize: 1
 			},
 			yaxis: {
-				tickSize: 200
+				tickSize: 200,
+				tickColor: '#DDDDDD'
 			}
 		});
 	
