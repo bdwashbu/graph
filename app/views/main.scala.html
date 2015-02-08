@@ -53,6 +53,12 @@
 	                box-shadow: 0px 1px 8px rgba(0,0,0,.1);
 				}
 				
+				#graph-lines, #graph-lines2 {
+				    margin-top: 30px;
+				    margin-bottom: 30px;
+				    padding: -20px;
+				}
+				
 				#menu {
 					float: left;
 					width: 420px;
@@ -142,13 +148,18 @@
 				},
 				grid: {
 					color: '#646464',
-					borderColor: '#AAAAAA',
 					backgroundColor: { colors: [ "#fff", "#eee" ] },
 					borderWidth: {
 						top: 1,
 						right: 1,
 						bottom: 2,
 						left: 2
+					},
+					borderColor: {
+						top: '#BBBBBB',
+						right: '#BBBBBB',
+						bottom: '#AAAAAA',
+						left: '#AAAAAA'
 					},
 					hoverable: true
 				},
@@ -165,95 +176,10 @@
 		
 		// Lines Graph #############################################
 		$.plot($('#graph-lines'), graphData, test);
-	
-		// Bars Graph ##############################################
-		$.plot($('#graph-bars'), graphData, {
-			series: {
-				bars: {
-					show: true,
-					barWidth: .9,
-					align: 'center'
-				},
-				shadowSize: 0
-			},
-			grid: {
-				color: '#646464',
-				borderColor: 'transparent',
-				borderWidth: 20,
-				hoverable: true
-			},
-			xaxis: {
-				tickColor: 'transparent',
-				tickDecimals: 2
-			},
-			yaxis: {
-				tickSize: 200
-			}
-		});
-		
+
 		// Lines Graph #############################################
 		$.plot($('#graph-lines2'), graphData2, test);
 	
-		// Bars Graph ##############################################
-		$.plot($('#graph-bars2'), graphData2, {
-			series: {
-				bars: {
-					show: true,
-					barWidth: .9,
-					align: 'center'
-				},
-				shadowSize: 0
-			},
-			grid: {
-				color: '#646464',
-				borderColor: 'transparent',
-				borderWidth: 20,
-				hoverable: true
-			},
-			xaxis: {
-				tickColor: 'transparent',
-				tickDecimals: 2
-			},
-			yaxis: {
-				tickSize: 20
-			}
-		});
-	
-		// Graph Toggle ############################################
-		$('#graph-bars').hide();
-		$('#graph-bars2').hide();
-	
-		$('#lines').on('click', function (e) {
-			$('#bars').removeClass('active');
-			$('#graph-bars').fadeOut();
-			$(this).addClass('active');
-			$('#graph-lines').fadeIn();
-			e.preventDefault();
-		});
-	
-		$('#bars').on('click', function (e) {
-			$('#lines').removeClass('active');
-			$('#graph-lines').fadeOut();
-			$(this).addClass('active');
-			$('#graph-bars').fadeIn().removeClass('hidden');
-			e.preventDefault();
-		});
-		
-		$('#lines2').on('click', function (e) {
-			$('#bars2').removeClass('active');
-			$('#graph-bars2').fadeOut();
-			$(this).addClass('active');
-			$('#graph-lines2').fadeIn();
-			e.preventDefault();
-		});
-	
-		$('#bars2').on('click', function (e) {
-			$('#lines2').removeClass('active');
-			$('#graph-lines2').fadeOut();
-			$(this).addClass('active');
-			$('#graph-bars2').fadeIn().removeClass('hidden');
-			e.preventDefault();
-		});
 	
 		// Tooltip #################################################
 		function showTooltip(x, y, contents) {
@@ -265,7 +191,7 @@
 	
 		var previousPoint = null;
 	
-		$('#graph-lines, #graph-bars').bind('plothover', function (event, pos, item) {
+		$('#graph-lines').bind('plothover', function (event, pos, item) {
 			if (item) {
 				if (previousPoint != item.dataIndex) {
 					previousPoint = item.dataIndex;
@@ -280,7 +206,7 @@
 			}
 		});
 		
-		$('#graph-lines2, #graph-bars2').bind('plothover', function (event, pos, item) {
+		$('#graph-lines2').bind('plothover', function (event, pos, item) {
 			if (item) {
 				if (previousPoint != item.dataIndex) {
 					previousPoint = item.dataIndex;
@@ -301,12 +227,24 @@
 	
 	<div id="outmost">
 	<div id="left">
-	    	@Application.getList("app/assets/mops")
-	    </div>
+    	@Application.getList("app/assets/mops")
+    </div>
 	    
-		<div id="graph-wrapper">
-			@index(text = "Welcome to graphing!")
+	<div id="graph-wrapper">
+		<div class="graph-container">
+		<div class="graph-info">
+			<a href="javascript:void(0)" class="visitors">Altitude</a>
+			</div>
+			<div id="graph-lines"></div>
 		</div>
+		
+		<div class="graph-container">
+			<div class="graph-info">
+				<a href="javascript:void(0)" class="returning">GroundSpeed</a>
+			</div>
+			<div id="graph-lines2"></div>
+		</div>
+	</div>
 
 	</div>
 

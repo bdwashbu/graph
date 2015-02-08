@@ -39,8 +39,9 @@ http://vladimirkudinov.com
 	position: relative;
 	width: 550px;
 	height: 300px;
-	padding: 20px;
-        margin-bottom: 40px;
+	padding-left: 20px;
+	padding-right: 20px;
+    padding-bottom: 70px;
 	
 	-webkit-box-shadow: 6px 6px 20px rgba(0,0,0,.035);
 	-moz-box-shadow: 6px 6px 20px rgba(0,0,0,.035);
@@ -92,6 +93,7 @@ http://vladimirkudinov.com
 	float: left;
 	padding: 7px 10px 5px 30px;
 	margin-right: 10px;
+	margin-bottom: 10px;
 	text-decoration: none;
 	cursor: default;
 }
@@ -118,7 +120,7 @@ http://vladimirkudinov.com
 .graph-info .returning:before { background: #77b7c5; }
 
 /* Lines & Bars Buttons */
-#lines, #bars, #lines2, #bars2 {
+#lines, #lines2 {
 	width: 34px;
 	height: 32px;
 	padding: 0;
@@ -129,7 +131,7 @@ http://vladimirkudinov.com
 	cursor: pointer;
 }
 
-#lines.active, #bars.active, #lines2.active, #bars2.active {
+#lines.active, #lines2.active {
 	background: #82d344;
 	background: -moz-linear-gradient(top,  #82d344 0%, #71c73e 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#82d344), color-stop(100%,#71c73e));
@@ -139,28 +141,23 @@ http://vladimirkudinov.com
 	background: linear-gradient(to bottom,  #82d344 0%,#71c73e 100%);
 }
 
-#lines span, #bars span {
+#lines span {
 	display: block;
 	width: 34px;
 	height: 32px;
 	background: url('../images/lines.png') no-repeat 9px 12px;
 }
 
-#lines2 span, #bars2 span {
+#lines2 span {
 	display: block;
 	width: 34px;
 	height: 32px;
 	background: url('../images/lines2.png') no-repeat 9px 12px;
 }
 
-#bars span { background: url('../images/bars.png') no-repeat center 10px; }
-#bars2 span { background: url('../images/bars2.png') no-repeat center 10px; }
-
 #lines.active span { background-image: url('../images/lines_active.png'); }
-#bars.active span { background-image: url('../images/bars_active.png'); }
 
 #lines2.active span { background-image: url('../images/lines_active2.png'); }
-#bars2.active span { background-image: url('../images/bars_active2.png'); }
 
 /* Hide the First and Last Y Label */
 .yAxis .tickLabel:first-child,
