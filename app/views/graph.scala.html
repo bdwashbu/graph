@@ -1,0 +1,14 @@
+@(dir: String)
+
+<ul class="jqueryFileTree" style="display: none;">
+
+@for((finalDir, file) <- Application.getDirs(dir)) {
+	<li class="directory collapsed"><a href="#" rel=@{finalDir + file}/>@file</a></li>
+}
+
+@for((ext, finalDir, file) <- Application.getFiles(dir)) {
+	<li class="file ext_@ext"/><a href="#" rel=@{finalDir + file}\>@file</a></li>
+}
+
+</ul>
+
