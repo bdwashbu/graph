@@ -13,6 +13,8 @@ import play.api.mvc._
 import play.api.data._
 import views.html._
 import models._
+import scala.io.Source._
+import scala.collection.mutable.ListBuffer
 
 object Application extends Controller {
 
@@ -21,8 +23,24 @@ object Application extends Controller {
   }
   
   def getGraphData(fileName: String) = Action { implicit request =>
-    println(fileName)
-    Ok("1,2,3,4,5,6,7,8,9")
+    val lines = fromFile("C:\\Scala\\Git\\graph\\app\\assets\\mops\\" + fileName).getLines
+    var results = ListBuffer[Float]()
+    lines.foreach { line =>
+        if (line.contains("Set_palt")) {
+           val loc = line.indexOfSlice("Set_palt")
+           if (loc != -1) {}
+             var i = loc
+             var endFound = false
+             for (x <- line) if (endFound == false) {
+               i += 1
+               if (line.charAt(i) == ')')
+                 endFound = true
+             }
+             results += line.subSequence(loc + 9, i).toString.toFloat
+        }
+    }
+    println(results.toList)
+    Ok(results.toList.map(_.toString).reduce{_ + ", " + _})
   }
   
 //  def javascriptRoutes() = Action { implicit request =>
