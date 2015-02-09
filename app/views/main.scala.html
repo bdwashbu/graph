@@ -137,7 +137,7 @@
 		// Graph Data ##############################################
 		var graphData = [{
 				// Visits
-				data: [ [6, 1300], [7, 1600], [8, 1900], [9, 2100], [10, 2500], [11, 2200], [12, 2000], [13, 1950], [14, 1900], [15, 2000] ],
+				data: [[0,0]],
 				color: '#71c73e'
 			}
 		];
@@ -145,7 +145,7 @@
 		// Graph Data ##############################################
 		var graphData2 = [{
 				// Returning Visits
-				data: [ [6, 100], [7, 120], [8, 150], [9, 150], [10, 150], [11, 140], [12, 180], [13, 200], [14, 225], [15, 250] ],
+				data: [[0,0]],
 				color: '#77b7c5',
 				points: { radius: 4, fillColor: '#77b7c5' }
 			}
@@ -154,10 +154,7 @@
 		$(function() {
 		    $( "#menu" ).menu({
 			  select: function( event, ui ) {
-				  var ajaxSuccess = function(action, data) {
-					    $("body").append("<br/>");
-					    $("body").append(action + " " + data);
-					};
+				  var ajaxSuccess = function(action, data) {};
 					 
 					var ajaxError = function(action, error) {
 					    alert(action + " : " +error);

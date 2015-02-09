@@ -43,28 +43,7 @@ object Application extends Controller {
     Ok(results.toList.map(_.toString).reduce{_ + ", " + _})
   }
   
-//  def javascriptRoutes() = Action { implicit request =>
-//  Ok(
-//    Routes.javascriptRouter("jsRoutes")(
-//    // Routes
-//    controllers.routes.javascript.Application.xxx,
-//    controllers.routes.javascript.Application.yyy
-//    )
-//    ).as(JAVASCRIPT)
-//  }
-  
   def getList(dirName: String) = {
-    val dir = new File(dirName)
-    println(dir.getAbsolutePath)
     views.html.graph(dirName)
   }
-  
-  def getAltitudeValue(filepath: String): List[Int] = {
-    import scala.io.Source._
-    
-    val lines = fromFile("C:\\Scala\\Git\\graph\\app\\assets\\mops\\Alamogordo").getLines
-    lines.take(10).foreach(println)
-    List(1,2,3)
-  }
-
 }
