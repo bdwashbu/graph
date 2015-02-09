@@ -20,12 +20,8 @@ object Application extends Controller {
     Ok(views.html.main("test"))
   }
   
-  def index = Action { implicit request =>
-    Ok("index Call!")
-  }
-  
-  def ajaxCall = Action { implicit request =>
-    println("jjj")
+  def getGraphData(fileName: String) = Action { implicit request =>
+    println(fileName)
     Ok("Ajax Call!")
   }
   

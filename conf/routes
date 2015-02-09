@@ -4,6 +4,10 @@
 
 GET     /                           controllers.Application.main
 
+# Javascript routing
+GET   /getGraphData         controllers.Application.getGraphData(fileName: String)
+GET   /javascriptRoutes   controllers.JavascriptRoute.javascriptRoutes
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /javascripts/*file      controllers.Assets.at(path="/public/javascripts", file)
 GET     /stylesheets/*file      controllers.Assets.at(path="/public/stylesheets", file)

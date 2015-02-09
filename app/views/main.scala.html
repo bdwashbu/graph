@@ -124,46 +124,11 @@
 		            ajaxError("AJAX 1:", error);
 		        }
 		    }
-	    jsRoutes.controllers.Application.ajaxCall().ajax(ajaxCallBack); }
+	    jsRoutes.controllers.Application.getGraphData(ui.toString()).ajax(ajaxCallBack); }
 	});
   });
   </script>
-<script type="text/javascript" src="@routes.JavascriptRoute.javascriptRoutes"></script>
-  
-  <script type="text/javascript">
-	var successFn = function(data) {
-	if(data == "true"){
-	$('#alert-box').html('');
-	$("#alert-box").append('<div>' + '<a data-dismiss="alert">×</a>  ' +
-	'<strong>Error!</strong>Email Id Already exist ! '+ '</div>');
-	}
-	else{
-	$('#alert-box').html('');
-	$("#alert-box").append('<div>' + '<a data-dismiss="alert">×</a>  ' +
-	'<strong>Success!</strong>Valid Email Id ! '+ '</div>');
-	}
-	console.debug("Success of Ajax Call");
-	console.debug(data);
-	};
-	var errorFn = function(err) {
-	console.debug("Error of ajax Call");
-	console.debug(err);
-	}
-	 
-	ajax1 = {
-	success: successFn,
-	error: errorFn
-	}
-	 
-	function isEmailExist() {
-	var idToGet = $("#email").val();
-	 
-	jsRoutes.controllers.Application.isEmailExist(idToGet)
-	.ajax(ajax1);
-	 
-	}
-	</script>
-	
+	<script type="text/javascript" src="@routes.JavascriptRoute.javascriptRoutes"></script>
 		
 	</head>
 	
