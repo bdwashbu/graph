@@ -22,7 +22,7 @@ object Application extends Controller {
   
   def getGraphData(fileName: String) = Action { implicit request =>
     println(fileName)
-    Ok("Ajax Call!")
+    Ok("1,2,3,4,5,6,7,8,9")
   }
   
 //  def javascriptRoutes() = Action { implicit request =>

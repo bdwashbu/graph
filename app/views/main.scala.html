@@ -122,29 +122,7 @@
 		
 		
 	<script>
-  $(function() {
-    $( "#menu" ).menu({
-	  select: function( event, ui ) {
-		  var ajaxSuccess = function(action, data) {
-			    $("body").append("<br/>");
-			    $("body").append(action + " " + data);
-			};
-			 
-			var ajaxError = function(action, error) {
-			    alert(action + " : " +error);
-			}
-
-		  var ajaxCallBack = {
-		        success : function(data) {
-		            ajaxSuccess("AJAX 1:", data);
-		        },
-		        error : function(error) {
-		            ajaxError("AJAX 1:", error);
-		        }
-		    }
-	    jsRoutes.controllers.Application.getGraphData(ui.item.text()).ajax(ajaxCallBack); }
-	});
-  });
+  
   </script>
 	<script type="text/javascript" src="@routes.JavascriptRoute.javascriptRoutes"></script>
 		
@@ -172,6 +150,42 @@
 				points: { radius: 4, fillColor: '#77b7c5' }
 			}
 		];
+
+		$(function() {
+		    $( "#menu" ).menu({
+			  select: function( event, ui ) {
+				  var ajaxSuccess = function(action, data) {
+					    $("body").append("<br/>");
+					    $("body").append(action + " " + data);
+					};
+					 
+					var ajaxError = function(action, error) {
+					    alert(action + " : " +error);
+					}
+
+				  var ajaxCallBack = {
+				        success : function(data) {
+				            strVale = data;
+				            var newVal = []
+				            graphData['data'] = []
+					        var strings = strVale.split(",");
+					        for (var i=0; i<strVale.length; i++)
+					        	newVal.push([i, strings[i]]);
+					        graphData = [{
+								// Visits
+								data: newVal,
+								color: '#71c73e'
+								}
+							];
+					        $.plot($('#graph-lines'), graphData, test);
+				        },
+				        error : function(error) {
+				            ajaxError("AJAX 1:", error);
+				        }
+				    }
+			    jsRoutes.controllers.Application.getGraphData(ui.item.text()).ajax(ajaxCallBack); }
+			});
+		  });
 
 		var test = {
 				series: {
