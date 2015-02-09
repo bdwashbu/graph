@@ -180,7 +180,37 @@
 				            ajaxError("AJAX 1:", error);
 				        }
 				    }
-			    jsRoutes.controllers.Application.getGraphData(ui.item.text()).ajax(ajaxCallBack); }
+			    jsRoutes.controllers.Application.getAltitudeData(ui.item.text()).ajax(ajaxCallBack);
+
+				  var ajaxSuccess = function(action, data) {};
+					 
+					var ajaxError = function(action, error) {
+					    alert(action + " : " +error);
+					}
+
+				  var ajaxCallBack = {
+				        success : function(data) {
+				            strVale = data;
+				            var newVal = []
+				            graphData['data'] = []
+					        var strings = strVale.split(",");
+					        for (var i=0; i<strings.length; i++)
+					        	newVal.push([i, strings[i]]);
+					        graphData = [{
+								// Visits
+								data: newVal,
+								color: '#71c73e'
+								}
+							];
+					        $.plot($('#graph-lines2'), graphData, test);
+				        },
+				        error : function(error) {
+				            ajaxError("AJAX 1:", error);
+				        }
+				    }
+			    jsRoutes.controllers.Application.getLatData(ui.item.text()).ajax(ajaxCallBack);
+			}
+		    
 			});
 		  });
 

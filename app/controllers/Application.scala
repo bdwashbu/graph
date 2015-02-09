@@ -22,7 +22,7 @@ object Application extends Controller {
     Ok(views.html.main("test"))
   }
   
-  def getGraphData(fileName: String) = Action { implicit request =>
+  def getAltitudeData(fileName: String) = Action { implicit request =>
     val lines = fromFile("C:\\Scala\\Git\\graph\\app\\assets\\mops\\" + fileName).getLines
     var results = ListBuffer[Float]()
     lines.foreach { line =>
@@ -37,6 +37,27 @@ object Application extends Controller {
                  endFound = true
              }
              results += line.subSequence(loc + 9, i).toString.toFloat
+        }
+    }
+    println(results.toList)
+    Ok(results.toList.map(_.toString).reduce{_ + ", " + _})
+  }
+  
+  def getLatData(fileName: String) = Action { implicit request =>
+    val lines = fromFile("C:\\Scala\\Git\\graph\\app\\assets\\mops\\" + fileName).getLines
+    var results = ListBuffer[Float]()
+    lines.foreach { line =>
+        if (line.contains("Set_gps.pos.lat")) {
+           val loc = line.indexOfSlice("Set_gps.pos.lat")
+           if (loc != -1) {}
+             var i = loc
+             var endFound = false
+             for (x <- line) if (endFound == false) {
+               i += 1
+               if (line.charAt(i) == ')')
+                 endFound = true
+             }
+             results += line.subSequence(loc + 16, i).toString.toFloat / 360000
         }
     }
     println(results.toList)

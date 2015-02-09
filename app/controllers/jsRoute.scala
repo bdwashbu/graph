@@ -6,12 +6,12 @@ import play.api.mvc.Controller
 import play.api.mvc.EssentialAction
 import play.core.Router.JavascriptReverseRoute
 import play.core.Router._
-import routes.javascript.Application.getGraphData
+import routes.javascript.Application._
  
 object JavascriptRoute extends Controller {
  
   /* Application related JavascriptReverse Route will goes here */
-  val appRoutes: List[JavascriptReverseRoute] = List(getGraphData)
+  val appRoutes: List[JavascriptReverseRoute] = List(getAltitudeData, getLatData)
  
   /* All JavascriptReverse Route will combine here */
   val javascriptRouters = appRoutes
