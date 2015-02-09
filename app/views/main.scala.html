@@ -39,14 +39,32 @@
 					margin: 0px 0px 10px 0px;
 				}
 	
-	            #graph-wrapper{width:640px; float:left; padding-left:50px; padding-top: 50px}
+	            #graph-wrapper{
+	               width:640px;
+	               position:absolute;
+	               left: 500px;
+	               top: 100px;
+	               padding-left:50px;
+	               padding-top: 50px
+	             }
 	
 				.example {
 					float: left;
 					margin: 15px;
 				}
 				
+				#outmost {
+				    margin: 0px;
+				    padding: 0px;
+				    position: absolute;
+				    left: -85px;
+				    top: -135px;
+				 }
+				
 				#left {
+				    position: absolute;
+				    left: 100px;
+				    top: 150px;
 					float: left;
 					width: 420px;
 					-moz-box-shadow: 0px 1px 8px rgba(0,0,0,.1);
@@ -124,7 +142,7 @@
 		            ajaxError("AJAX 1:", error);
 		        }
 		    }
-	    jsRoutes.controllers.Application.getGraphData(ui.toString()).ajax(ajaxCallBack); }
+	    jsRoutes.controllers.Application.getGraphData(ui.item.text()).ajax(ajaxCallBack); }
 	});
   });
   </script>
@@ -246,25 +264,25 @@
 	</script>
 	
 	<div id="outmost">
-	<div id="left">
-    	@Application.getList("app/assets/mops")
-    </div>
-	    
-	<div id="graph-wrapper">
-		<div class="graph-container">
-		<div class="graph-info">
-			<a href="javascript:void(0)" class="visitors">Altitude</a>
+		<div id="left">
+	    	@Application.getList("app/assets/mops")
+	    </div>
+		    
+		<div id="graph-wrapper">
+			<div class="graph-container">
+				<div class="graph-info">
+					<a href="javascript:void(0)" class="visitors">Altitude</a>
+					</div>
+					<div id="graph-lines"></div>
+				</div>
+				
+				<div class="graph-container">
+					<div class="graph-info">
+						<a href="javascript:void(0)" class="returning">GroundSpeed</a>
+					</div>
+				<div id="graph-lines2"></div>
 			</div>
-			<div id="graph-lines"></div>
 		</div>
-		
-		<div class="graph-container">
-			<div class="graph-info">
-				<a href="javascript:void(0)" class="returning">GroundSpeed</a>
-			</div>
-			<div id="graph-lines2"></div>
-		</div>
-	</div>
 
 	</div>
 	
