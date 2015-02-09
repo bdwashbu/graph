@@ -71,7 +71,7 @@
 	                box-shadow: 0px 1px 8px rgba(0,0,0,.1);
 				}
 				
-				#graph-lines, #graph-lines2 {
+				#graph-lines, #graph-lines2, #graph-lines3, #graph-lines4, #graph-lines5 {
 				    margin-top: 30px;
 				    margin-bottom: 30px;
 				    padding: -20px;
@@ -141,15 +141,6 @@
 				color: '#71c73e'
 			}
 		];
-		
-		// Graph Data ##############################################
-		var graphData2 = [{
-				// Returning Visits
-				data: [[0,0]],
-				color: '#77b7c5',
-				points: { radius: 4, fillColor: '#77b7c5' }
-			}
-		];
 
 		$(function() {
 		    $( "#menu" ).menu({
@@ -160,7 +151,8 @@
 					    alert(action + " : " +error);
 					}
 
-				  var ajaxCallBack = {
+				  function ajaxCallBack(graphId) {
+					  var blah = {
 				        success : function(data) {
 				            strVale = data;
 				            var newVal = []
@@ -174,41 +166,21 @@
 								color: '#71c73e'
 								}
 							];
-					        $.plot($('#graph-lines'), graphData, test);
+					        $.plot($(graphId), graphData, test);
 				        },
 				        error : function(error) {
 				            ajaxError("AJAX 1:", error);
 				        }
+					  }
+					  return blah;
 				    }
-			    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_palt').ajax(ajaxCallBack);
-
-				  var ajaxSuccess = function(action, data) {};
-					 
-					var ajaxError = function(action, error) {
-					    alert(action + " : " +error);
-					}
-
-				  var ajaxCallBack = {
-				        success : function(data) {
-				            strVale = data;
-				            var newVal = []
-				            graphData['data'] = []
-					        var strings = strVale.split(",");
-					        for (var i=0; i<strings.length; i++)
-					        	newVal.push([i, strings[i]]);
-					        graphData = [{
-								// Visits
-								data: newVal,
-								color: '#71c73e'
-								}
-							];
-					        $.plot($('#graph-lines2'), graphData, test);
-				        },
-				        error : function(error) {
-				            ajaxError("AJAX 1:", error);
-				        }
-				    }
-			    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_ralt').ajax(ajaxCallBack);
+				    
+				jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_palt').ajax(ajaxCallBack('#graph-lines'));   
+			    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_ralt').ajax(ajaxCallBack('#graph-lines2'));
+			    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_gps.pos.lat').ajax(ajaxCallBack('#graph-lines3'));
+			    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_gps.pos.lon').ajax(ajaxCallBack('#graph-lines4'));
+			    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_ils.loc').ajax(ajaxCallBack('#graph-lines5'));
+			 	
 			}
 		    
 			});
@@ -244,13 +216,16 @@
 					ticks: 10
 				},
 				yaxis: {
-					ticks: 10,
+					ticks: 6,
 					tickColor: '#DDDDDD'
 				}
 			};
 		
 		$.plot($('#graph-lines'), graphData, test);
-		$.plot($('#graph-lines2'), graphData2, test);
+		$.plot($('#graph-lines2'), graphData, test);
+		$.plot($('#graph-lines3'), graphData, test);
+		$.plot($('#graph-lines4'), graphData, test);
+		$.plot($('#graph-lines5'), graphData, test);
 	
 		// Tooltip #################################################
 		function showTooltip(x, y, contents) {
@@ -281,8 +256,11 @@
 		}
 
 		
-		$('#graph-lines').bind('plothover', hoverCallback('knots'))
-		$('#graph-lines2').bind('plothover', hoverCallback('degrees'))
+		$('#graph-lines').bind('plothover', hoverCallback('feet'))
+		$('#graph-lines2').bind('plothover', hoverCallback('feet'))
+		$('#graph-lines3').bind('plothover', hoverCallback('degrees'))
+		$('#graph-lines4').bind('plothover', hoverCallback('degrees'))
+		$('#graph-lines5').bind('plothover', hoverCallback('degrees'))
 
 	
 	});
@@ -297,15 +275,37 @@
 			<div class="graph-container">
 				<div class="graph-info">
 					<a href="javascript:void(0)" class="visitors">Altitude</a>
+				</div>
+				<div id="graph-lines"></div>
+			</div>
+				
+				<div class="graph-container">
+					<div class="graph-info">
+						<a href="javascript:void(0)" class="returning">Radio Alt</a>
 					</div>
-					<div id="graph-lines"></div>
+					<div id="graph-lines2"></div>
 				</div>
 				
 				<div class="graph-container">
 					<div class="graph-info">
-						<a href="javascript:void(0)" class="returning">GroundSpeed</a>
+						<a href="javascript:void(0)" class="returning">Lat</a>
 					</div>
-				<div id="graph-lines2"></div>
+					<div id="graph-lines3"></div>
+				</div>
+				
+				<div class="graph-container">
+					<div class="graph-info">
+						<a href="javascript:void(0)" class="returning">Lon</a>
+					</div>
+					<div id="graph-lines4"></div>
+				</div>
+				
+				<div class="graph-container">
+					<div class="graph-info">
+						<a href="javascript:void(0)" class="returning">ILS Loc</a>
+					</div>
+					<div id="graph-lines5"></div>
+				</div>
 			</div>
 		</div>
 
