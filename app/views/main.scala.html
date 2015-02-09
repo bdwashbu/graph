@@ -180,7 +180,7 @@
 				            ajaxError("AJAX 1:", error);
 				        }
 				    }
-			    jsRoutes.controllers.Application.getAltitudeData(ui.item.text()).ajax(ajaxCallBack);
+			    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_palt').ajax(ajaxCallBack);
 
 				  var ajaxSuccess = function(action, data) {};
 					 
@@ -208,7 +208,7 @@
 				            ajaxError("AJAX 1:", error);
 				        }
 				    }
-			    jsRoutes.controllers.Application.getLatData(ui.item.text()).ajax(ajaxCallBack);
+			    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_ralt').ajax(ajaxCallBack);
 			}
 		    
 			});

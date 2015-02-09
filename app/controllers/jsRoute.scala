@@ -11,7 +11,7 @@ import routes.javascript.Application._
 object JavascriptRoute extends Controller {
  
   /* Application related JavascriptReverse Route will goes here */
-  val appRoutes: List[JavascriptReverseRoute] = List(getAltitudeData, getLatData)
+  val appRoutes: List[JavascriptReverseRoute] = List(getGraphData)
  
   /* All JavascriptReverse Route will combine here */
   val javascriptRouters = appRoutes

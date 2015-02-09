@@ -22,12 +22,12 @@ object Application extends Controller {
     Ok(views.html.main("test"))
   }
   
-  def getAltitudeData(fileName: String) = Action { implicit request =>
+  def getGraphData(fileName: String, setString: String) = Action { implicit request =>
     val lines = fromFile("C:\\Scala\\Git\\graph\\app\\assets\\mops\\" + fileName).getLines
     var results = ListBuffer[Float]()
     lines.foreach { line =>
-        if (line.contains("Set_palt")) {
-           val loc = line.indexOfSlice("Set_palt")
+        if (line.contains(setString)) {
+           val loc = line.indexOfSlice(setString) 
            if (loc != -1) {}
              var i = loc
              var endFound = false
@@ -36,34 +36,13 @@ object Application extends Controller {
                if (line.charAt(i) == ')')
                  endFound = true
              }
-             results += line.subSequence(loc + 9, i).toString.toFloat
+             results += line.subSequence(loc + setString.size+1, i).toString.toFloat
         }
     }
     println(results.toList)
     Ok(results.toList.map(_.toString).reduce{_ + ", " + _})
   }
-  
-  def getLatData(fileName: String) = Action { implicit request =>
-    val lines = fromFile("C:\\Scala\\Git\\graph\\app\\assets\\mops\\" + fileName).getLines
-    var results = ListBuffer[Float]()
-    lines.foreach { line =>
-        if (line.contains("Set_gps.pos.lat")) {
-           val loc = line.indexOfSlice("Set_gps.pos.lat")
-           if (loc != -1) {}
-             var i = loc
-             var endFound = false
-             for (x <- line) if (endFound == false) {
-               i += 1
-               if (line.charAt(i) == ')')
-                 endFound = true
-             }
-             results += line.subSequence(loc + 16, i).toString.toFloat / 360000
-        }
-    }
-    println(results.toList)
-    Ok(results.toList.map(_.toString).reduce{_ + ", " + _})
-  }
-  
+ 
   def getList(dirName: String) = {
     views.html.graph(dirName)
   }
