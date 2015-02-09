@@ -249,12 +249,8 @@
 				}
 			};
 		
-		// Lines Graph #############################################
 		$.plot($('#graph-lines'), graphData, test);
-
-		// Lines Graph #############################################
 		$.plot($('#graph-lines2'), graphData2, test);
-	
 	
 		// Tooltip #################################################
 		function showTooltip(x, y, contents) {
@@ -266,35 +262,27 @@
 	
 		var previousPoint = null;
 	
-		$('#graph-lines').bind('plothover', function (event, pos, item) {
-			if (item) {
-				if (previousPoint != item.dataIndex) {
-					previousPoint = item.dataIndex;
+		function hoverCallback(descriptor) {
+			function hoverCallback(element, index, item) {
+				if (item) {
+					if (previousPoint != item.dataIndex) {
+						previousPoint = item.dataIndex;
+						$('#tooltip').remove();
+						var x = item.datapoint[0],
+							y = item.datapoint[1];
+							showTooltip(item.pageX, item.pageY, y + ' ' + descriptor + ' at ' + x + '.00s');
+					}
+				} else {
 					$('#tooltip').remove();
-					var x = item.datapoint[0],
-						y = item.datapoint[1];
-						showTooltip(item.pageX, item.pageY, y + ' feet at ' + x + '.00s');
+					previousPoint = null;
 				}
-			} else {
-				$('#tooltip').remove();
-				previousPoint = null;
 			}
-		});
+			return hoverCallback;
+		}
+
 		
-		$('#graph-lines2').bind('plothover', function (event, pos, item) {
-			if (item) {
-				if (previousPoint != item.dataIndex) {
-					previousPoint = item.dataIndex;
-					$('#tooltip').remove();
-					var x = item.datapoint[0],
-						y = item.datapoint[1];
-						showTooltip(item.pageX, item.pageY, y + ' knots at ' + x + '.00s');
-				}
-			} else {
-				$('#tooltip').remove();
-				previousPoint = null;
-			}
-		});
+		$('#graph-lines').bind('plothover', hoverCallback('knots'))
+		$('#graph-lines2').bind('plothover', hoverCallback('degrees'))
 
 	
 	});
