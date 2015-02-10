@@ -39,6 +39,10 @@
 					margin: 0px 0px 10px 0px;
 				}
 	
+				.active {
+				    background-color: #FF8C00;
+				}
+	
 	            #graph-wrapper{
 	               width:640px;
 	               position:absolute;
@@ -174,6 +178,14 @@
 			}
 		];
 
+		$(function() { 
+		    $('#left').on('click','.nav', function ( e ) {
+		        e.preventDefault();
+		        $(this).parents('#left').find('.active').removeClass('active').end().end().addClass('active');
+		        $(activeTab).show();
+		    });
+		});
+		
 		$(function() {
 		    $( "#menu" ).menu({
 			  select: function( event, ui ) {
@@ -198,8 +210,11 @@
 								color: '#71c73e'
 								}
 							];
+					        $(graphId).hide()
 					        $.plot($(graphId), graphData, test);
-					        $('#graph-lines, #graph-lines2, #graph-lines3, #graph-lines4, #graph-lines5, #graph-lines6, #graph-lines7, #graph-lines8, #graph-lines9, #graph-lines10').fadeIn(600);
+					        $(graphId).fadeIn(200);
+					        
+					        
 					        
 				        },
 				        error : function(error) {
@@ -210,7 +225,7 @@
 				    }
 
 				if (jQuery(ui.item).find("a").size() == 1) {   
-					$('#graph-lines, #graph-lines2, #graph-lines3, #graph-lines4, #graph-lines5, #graph-lines6, #graph-lines7, #graph-lines8, #graph-lines9, #graph-lines10').fadeOut(300, function() {
+					$('#graph-lines, #graph-lines2, #graph-lines3, #graph-lines4, #graph-lines5, #graph-lines6, #graph-lines7, #graph-lines8, #graph-lines9, #graph-lines10').fadeOut(200, function() {
 						jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_palt').ajax(ajaxCallBack('#graph-lines'));   
 					    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_ralt').ajax(ajaxCallBack('#graph-lines2'));
 					    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_gps.pos.lat').ajax(ajaxCallBack('#graph-lines3'));

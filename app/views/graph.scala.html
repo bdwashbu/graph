@@ -5,14 +5,14 @@
 @display(file: File) = {
   @if(file.isDirectory) {
   	<li>@file.getName
-    <ul>
-    @for(child <- Option(file.listFiles).getOrElse(Array())) {
-		@display(child)
-	}
-    </ul>
+	    <ul>
+	    @for(child <- Option(file.listFiles).getOrElse(Array())) {
+			@display(child)
+		}
+	    </ul>
     </li>
   } else {
-  	<li><a href="@file.getAbsolutePath">@file.getName</a></li>
+  	<li class="nav" ><a href="@file.getAbsolutePath">@file.getName</a></li>
   }
 }
 

@@ -51,33 +51,36 @@ object Application extends Controller {
          if (command.charAt(endIndex) == ')')
            endFound = true
       }
-      if (command.size > 8) {
-        if (command.contains("Set_palt")) {
-            currentInfo.pressureAlt = command.subSequence(9, endIndex).toString.toFloat
-        } else if (command.contains("Set_ralt")) {
-            currentInfo.radioAltitude = command.subSequence(9, endIndex).toString.toFloat
-        } else if (command.contains("Set_gps.pos.lat")) {
-            currentInfo.gpsLatitude = command.subSequence(16, endIndex).toString.toFloat
-        } else if (command.contains("Set_gps.pos.lon")) {
-            currentInfo.gpsLongitude = command.subSequence(16, endIndex).toString.toFloat
-        } else if (command.contains("Set_ils.loc")) {
-            currentInfo.ilsLocation = command.subSequence(11, endIndex).toString.toFloat
-        } else if (command.contains("Set_gps.gs_knts")) {
-            currentInfo.groundSpeed = command.subSequence(16, endIndex).toString.toFloat
-        } else if (command.contains("Set_gps.gpsalt")) {
-            currentInfo.gpsAltitude = command.subSequence(15, endIndex).toString.toFloat
-        } else if (command.contains("Set_gps.trk")) {
-            currentInfo.trackAngle = command.subSequence(12, endIndex).toString.toFloat
-        } else if (command.contains("Set_gps.gps_vs_fpm")) {
-            currentInfo.gps_vs_fpm = command.subSequence(19, endIndex).toString.toFloat
-        } else if (command.contains("Set_bvs")) {
-            currentInfo.verticalSpeed = command.subSequence(8, endIndex).toString.toFloat
-        } else if (command.contains("Set_gps.meas_time")) {
-          println(currentInfo)
-          results += currentInfo.copy()
-          timerCounter += 1
-        }
-      }
+      try {
+        if (command.size > 8) {
+          if (command.contains("Set_palt")) {
+              currentInfo.pressureAlt = command.subSequence(9, endIndex).toString.toFloat
+          } else if (command.contains("Set_ralt")) {
+              currentInfo.radioAltitude = command.subSequence(9, endIndex).toString.toFloat
+          } else if (command.contains("Set_gps.pos.lat")) {
+              currentInfo.gpsLatitude = command.subSequence(16, endIndex).toString.toFloat
+          } else if (command.contains("Set_gps.pos.lon")) {
+              currentInfo.gpsLongitude = command.subSequence(16, endIndex).toString.toFloat
+          } else if (command.contains("Set_ils.loc")) {
+              currentInfo.ilsLocation = command.subSequence(12, endIndex).toString.toFloat
+          } else if (command.contains("Set_gps.gs_knts")) {
+              currentInfo.groundSpeed = command.subSequence(16, endIndex).toString.toFloat
+          } else if (command.contains("Set_gps.gpsalt")) {
+              currentInfo.gpsAltitude = command.subSequence(15, endIndex).toString.toFloat
+          } else if (command.contains("Set_gps.trk")) {
+              currentInfo.trackAngle = command.subSequence(12, endIndex).toString.toFloat
+          } else if (command.contains("Set_gps.gps_vs_fpm")) {
+              currentInfo.gps_vs_fpm = command.subSequence(19, endIndex).toString.toFloat
+          } else if (command.contains("Set_bvs")) {
+              currentInfo.verticalSpeed = command.subSequence(8, endIndex).toString.toFloat
+          } else if (command.contains("Set_gps.meas_time")) {
+            results += currentInfo.copy()
+            timerCounter += 1
+          }
+       } 
+      } catch {
+           case ioe: NumberFormatException => println("BROKEN " + command)
+         }
     }
     
      val finalResult = setString match {
