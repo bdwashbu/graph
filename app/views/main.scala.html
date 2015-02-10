@@ -185,6 +185,11 @@
 		        $(activeTab).show();
 		    });
 		});
+
+		function bumpOffset(id, amt) {
+			var offset = $(id).offset();
+			$(id).offset({left: offset.left + amt, top: offset.top});
+		}
 		
 		$(function() {
 		    $( "#menu" ).menu({
@@ -197,7 +202,7 @@
 
 				  function ajaxCallBack(graphId) {
 					  var blah = {
-				        success : function(data) {
+				        success: function(data) {
 				            strVale = data;
 				            var newVal = []
 				            graphData['data'] = []
@@ -210,22 +215,33 @@
 								color: '#71c73e'
 								}
 							];
-					        $(graphId).hide()
+
 					        $.plot($(graphId), graphData, test);
-					        $(graphId).fadeIn(200);
-					        
-					        
-					        
+					        $(graphId).hide();
+					        bumpOffset(graphId, 500);
+					        $(graphId).fadeIn(400);
 				        },
-				        error : function(error) {
+				        error: function(error) {
 				            ajaxError("AJAX 1:", error);
 				        }
 					  }
 					  return blah;
 				    }
 
+				
+				  
 				if (jQuery(ui.item).find("a").size() == 1) {   
-					$('#graph-lines, #graph-lines2, #graph-lines3, #graph-lines4, #graph-lines5, #graph-lines6, #graph-lines7, #graph-lines8, #graph-lines9, #graph-lines10').fadeOut(200, function() {
+					$('#graph-lines, #graph-lines2, #graph-lines3, #graph-lines4, #graph-lines5, #graph-lines6, #graph-lines7, #graph-lines8, #graph-lines9, #graph-lines10').fadeOut(400, function() {
+						bumpOffset('#graph-lines', -500);
+						bumpOffset('#graph-lines2', -500);
+						bumpOffset('#graph-lines3', -500);
+						bumpOffset('#graph-lines4', -500);
+						bumpOffset('#graph-lines5', -500);
+						bumpOffset('#graph-lines6', -500);
+						bumpOffset('#graph-lines7', -500);
+						bumpOffset('#graph-lines8', -500);
+						bumpOffset('#graph-lines9', -500);
+						bumpOffset('#graph-lines10', -500);
 						jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_palt').ajax(ajaxCallBack('#graph-lines'));   
 					    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_ralt').ajax(ajaxCallBack('#graph-lines2'));
 					    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_gps.pos.lat').ajax(ajaxCallBack('#graph-lines3'));
