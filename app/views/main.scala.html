@@ -47,6 +47,33 @@
 	               padding-left:50px;
 	               padding-top: 50px
 	             }
+	             
+	             #graph-wrapper2{
+	               width:640px;
+	               position:absolute;
+	               left: 800px;
+	               top: 100px;
+	               padding-left:50px;
+	               padding-top: 50px
+	             }
+	             
+	             #graph-wrapper3{
+	               width:640px;
+	               position:absolute;
+	               left: 1100px;
+	               top: 100px;
+	               padding-left:50px;
+	               padding-top: 50px
+	             }
+	             
+	             #graph-wrapper4{
+	               width:640px;
+	               position:absolute;
+	               left: 1400px;
+	               top: 100px;
+	               padding-left:50px;
+	               padding-top: 50px
+	             }
 	
 				.example {
 					float: left;
@@ -71,7 +98,7 @@
 	                box-shadow: 0px 1px 8px rgba(0,0,0,.1);
 				}
 				
-				#graph-lines, #graph-lines2, #graph-lines3, #graph-lines4, #graph-lines5 {
+				#graph-lines, #graph-lines2, #graph-lines3, #graph-lines4, #graph-lines5, #graph-lines6, #graph-lines7, #graph-lines8, #graph-lines9, #graph-lines10 {
 				    margin-top: 30px;
 				    margin-bottom: 30px;
 				    padding: -20px;
@@ -87,6 +114,11 @@
 					border-left: solid 1px #AAA;
 					border-bottom: solid 1px #AAA;
 					border-right: solid 1px #AAA;
+					overflow-y: scroll;
+					overflow-x: visible !important;
+                    height: 900px;
+                    position: fixed !important;
+                    z-index: 100 !important;
 				}
 	
 				.demo {
@@ -167,6 +199,8 @@
 								}
 							];
 					        $.plot($(graphId), graphData, test);
+					        $('#graph-lines, #graph-lines2, #graph-lines3, #graph-lines4, #graph-lines5, #graph-lines6, #graph-lines7, #graph-lines8, #graph-lines9, #graph-lines10').fadeIn(600);
+					        
 				        },
 				        error : function(error) {
 				            ajaxError("AJAX 1:", error);
@@ -174,13 +208,21 @@
 					  }
 					  return blah;
 				    }
-				    
-				jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_palt').ajax(ajaxCallBack('#graph-lines'));   
-			    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_ralt').ajax(ajaxCallBack('#graph-lines2'));
-			    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_gps.pos.lat').ajax(ajaxCallBack('#graph-lines3'));
-			    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_gps.pos.lon').ajax(ajaxCallBack('#graph-lines4'));
-			    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_ils.loc').ajax(ajaxCallBack('#graph-lines5'));
-			 	
+
+				if (jQuery(ui.item).find("a").size() == 1) {   
+					$('#graph-lines, #graph-lines2, #graph-lines3, #graph-lines4, #graph-lines5, #graph-lines6, #graph-lines7, #graph-lines8, #graph-lines9, #graph-lines10').fadeOut(300, function() {
+						jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_palt').ajax(ajaxCallBack('#graph-lines'));   
+					    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_ralt').ajax(ajaxCallBack('#graph-lines2'));
+					    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_gps.pos.lat').ajax(ajaxCallBack('#graph-lines3'));
+					    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_gps.pos.lon').ajax(ajaxCallBack('#graph-lines4'));
+					    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_ils.loc').ajax(ajaxCallBack('#graph-lines5'));
+					    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_gps.gs_knts').ajax(ajaxCallBack('#graph-lines6'));
+					    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_gps.gpsalt').ajax(ajaxCallBack('#graph-lines7'));
+					    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_gps.trk').ajax(ajaxCallBack('#graph-lines8'));
+					    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_gps.gps_vs_fpm').ajax(ajaxCallBack('#graph-lines9'));
+					    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_bvs').ajax(ajaxCallBack('#graph-lines10'));
+					});
+				}
 			}
 		    
 			});
@@ -213,11 +255,27 @@
 				},
 				xaxis: {
 					tickColor: '#DDDDDD',
-					ticks: 10
+					ticks: 6,
+					font: {
+						 color: '#777777',
+					     size: 11,
+					     style: "italic",
+					     weight: "bold",
+					     family: "sans-serif",
+					     variant: "small-caps"
+					}
 				},
 				yaxis: {
 					ticks: 6,
-					tickColor: '#DDDDDD'
+					tickColor: '#DDDDDD',
+					font: {
+						 color: '#777777',
+					     size: 11,
+					     style: "italic",
+					     weight: "bold",
+					     family: "sans-serif",
+					     variant: "small-caps"
+					}
 				}
 			};
 		
@@ -226,6 +284,11 @@
 		$.plot($('#graph-lines3'), graphData, test);
 		$.plot($('#graph-lines4'), graphData, test);
 		$.plot($('#graph-lines5'), graphData, test);
+		$.plot($('#graph-lines6'), graphData, test);
+		$.plot($('#graph-lines7'), graphData, test);
+		$.plot($('#graph-lines8'), graphData, test);
+		$.plot($('#graph-lines9'), graphData, test);
+		$.plot($('#graph-lines10'), graphData, test);
 	
 		// Tooltip #################################################
 		function showTooltip(x, y, contents) {
@@ -261,7 +324,10 @@
 		$('#graph-lines3').bind('plothover', hoverCallback('degrees'))
 		$('#graph-lines4').bind('plothover', hoverCallback('degrees'))
 		$('#graph-lines5').bind('plothover', hoverCallback('degrees'))
-
+		$('#graph-lines6').bind('plothover', hoverCallback('degrees'))
+		$('#graph-lines7').bind('plothover', hoverCallback('degrees'))
+		$('#graph-lines8').bind('plothover', hoverCallback('degrees'))
+		$('#graph-lines9').bind('plothover', hoverCallback('degrees'))
 	
 	});
 	</script>
@@ -279,35 +345,74 @@
 				<div id="graph-lines"></div>
 			</div>
 				
-				<div class="graph-container">
-					<div class="graph-info">
-						<a href="javascript:void(0)" class="returning">Radio Alt</a>
-					</div>
-					<div id="graph-lines2"></div>
+			<div class="graph-container">
+				<div class="graph-info">
+					<a href="javascript:void(0)" class="returning">Radio Alt</a>
 				</div>
-				
-				<div class="graph-container">
-					<div class="graph-info">
-						<a href="javascript:void(0)" class="returning">Lat</a>
-					</div>
-					<div id="graph-lines3"></div>
-				</div>
-				
-				<div class="graph-container">
-					<div class="graph-info">
-						<a href="javascript:void(0)" class="returning">Lon</a>
-					</div>
-					<div id="graph-lines4"></div>
-				</div>
-				
-				<div class="graph-container">
-					<div class="graph-info">
-						<a href="javascript:void(0)" class="returning">ILS Loc</a>
-					</div>
-					<div id="graph-lines5"></div>
-				</div>
+				<div id="graph-lines2"></div>
 			</div>
-		</div>
+				
+			<div class="graph-container">
+				<div class="graph-info">
+					<a href="javascript:void(0)" class="returning">Lat</a>
+				</div>
+				<div id="graph-lines3"></div>
+			</div>
+			
+		  </div>
+		  <div id="graph-wrapper2">
+			<div class="graph-container">
+				<div class="graph-info">
+					<a href="javascript:void(0)" class="visitors">Lon</a>
+				</div>
+				<div id="graph-lines4"></div>
+			</div>
+				
+			<div class="graph-container">
+				<div class="graph-info">
+					<a href="javascript:void(0)" class="returning">ILS Loc</a>
+				</div>
+				<div id="graph-lines5"></div>
+			</div>
+			
+			<div class="graph-container">
+				<div class="graph-info">
+					<a href="javascript:void(0)" class="returning">Groundspeed</a>
+				</div>
+				<div id="graph-lines6"></div>
+			</div>
+		  </div>
+		  <div id="graph-wrapper3">
+			<div class="graph-container">
+				<div class="graph-info">
+					<a href="javascript:void(0)" class="visitors">GPS Alt</a>
+				</div>
+				<div id="graph-lines7"></div>
+			</div>
+				
+			<div class="graph-container">
+				<div class="graph-info">
+					<a href="javascript:void(0)" class="returning">Trackangle</a>
+				</div>
+				<div id="graph-lines8"></div>
+			</div>
+			
+			<div class="graph-container">
+				<div class="graph-info">
+					<a href="javascript:void(0)" class="returning">gps_vs_fpm</a>
+				</div>
+				<div id="graph-lines9"></div>
+			</div>
+		  </div>
+		  <div id="graph-wrapper4">
+			<div class="graph-container">
+				<div class="graph-info">
+					<a href="javascript:void(0)" class="returning">vert speed</a>
+				</div>
+				<div id="graph-lines10"></div>
+			</div>
+		  </div>
+	  </div>
 
 	</div>
 	

@@ -39,8 +39,7 @@ object Application extends Controller {
              results += line.subSequence(loc + setString.size+1, i).toString.toFloat
         }
     }
-    println(results.toList)
-    Ok(results.toList.map(_.toString).reduce{_ + ", " + _})
+    Ok(results.toList.map(_.toString).foldLeft(""){_ + ", " + _})
   }
  
   def getList(dirName: String) = {

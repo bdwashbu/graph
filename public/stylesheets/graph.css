@@ -37,8 +37,8 @@ http://vladimirkudinov.com
 /*  Graph Container */
 .graph-container {
 	position: relative;
-	width: 550px;
-	height: 300px;
+	width: 250px;
+	height: 200px;
 	padding-left: 20px;
 	padding-right: 20px;
     padding-bottom: 70px;
@@ -91,11 +91,13 @@ http://vladimirkudinov.com
 	position: relative;
 	display: inline-block;
 	float: left;
-	padding: 7px 10px 5px 30px;
+	padding: 4px 10px 4px 22px;
 	margin-right: 10px;
 	margin-bottom: 10px;
+	margin-left: 100px;
 	text-decoration: none;
 	cursor: default;
+	height: 15px;
 }
 
 /* Color Circle for Links */
@@ -105,8 +107,9 @@ http://vladimirkudinov.com
 	content: '';
 	width: 8px;
 	height: 8px;
-	top: 13px;
-	left: 13px;
+	top: 9px;
+	left: 8px;
+	
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
