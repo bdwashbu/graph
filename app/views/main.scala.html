@@ -209,10 +209,34 @@
 					        var strings = strVale.split(",");
 					        for (var i=0; i<strings.length; i++)
 					        	newVal.push([i, strings[i]]);
+
+					        var color = 0;
+							if (graphId == '#graph-lines') {
+								color = '#71c73e';
+							} else if (graphId == '#graph-lines2') {
+								color = '#77b7c5';
+							} else if (graphId == '#graph-lines3') {
+								color = '#c7943e';
+							} else if (graphId == '#graph-lines4') {
+								color = '#943ec7';
+							} else if (graphId == '#graph-lines5') {
+								color = '#c73e71';
+							} else if (graphId == '#graph-lines6') {
+								color = '#3ec794';
+							} else if (graphId == '#graph-lines7') {
+								color = '#3ec794';
+							} else if (graphId == '#graph-lines8') {
+								color = '#c7503e';
+							} else if (graphId == '#graph-lines9') {
+								color = '#b6c73e';
+							} else if (graphId == '#graph-lines10') {
+								color = '#c73e72';
+							}
+				        	
 					        graphData = [{
 								// Visits
 								data: newVal,
-								color: '#71c73e'
+								color: color
 								}
 							];
 
@@ -390,21 +414,21 @@
 		<div id="graph-wrapper">
 			<div class="graph-container">
 				<div class="graph-info">
-					<a href="javascript:void(0)" class="visitors">Altitude</a>
+					<a href="javascript:void(0)" class="altitudeGraph">Altitude</a>
 				</div>
 				<div id="graph-lines"></div>
 			</div>
 				
 			<div class="graph-container">
 				<div class="graph-info">
-					<a href="javascript:void(0)" class="returning">Radio Alt</a>
+					<a href="javascript:void(0)" class="radAltGraph">Radio Alt</a>
 				</div>
 				<div id="graph-lines2"></div>
 			</div>
 				
 			<div class="graph-container">
 				<div class="graph-info">
-					<a href="javascript:void(0)" class="returning">Lat</a>
+					<a href="javascript:void(0)" class="latGraph">Lat</a>
 				</div>
 				<div id="graph-lines3"></div>
 			</div>
@@ -413,21 +437,21 @@
 		  <div id="graph-wrapper2">
 			<div class="graph-container">
 				<div class="graph-info">
-					<a href="javascript:void(0)" class="visitors">Lon</a>
+					<a href="javascript:void(0)" class="lonGraph">Lon</a>
 				</div>
 				<div id="graph-lines4"></div>
 			</div>
 				
 			<div class="graph-container">
 				<div class="graph-info">
-					<a href="javascript:void(0)" class="returning">ILS Loc</a>
+					<a href="javascript:void(0)" class="ilsLocGraph">ILS Loc</a>
 				</div>
 				<div id="graph-lines5"></div>
 			</div>
 			
 			<div class="graph-container">
 				<div class="graph-info">
-					<a href="javascript:void(0)" class="returning">Groundspeed</a>
+					<a href="javascript:void(0)" class="groundspeedGraph">Groundspeed</a>
 				</div>
 				<div id="graph-lines6"></div>
 			</div>
@@ -435,21 +459,21 @@
 		  <div id="graph-wrapper3">
 			<div class="graph-container">
 				<div class="graph-info">
-					<a href="javascript:void(0)" class="visitors">GPS Alt</a>
+					<a href="javascript:void(0)" class="gpsAltitudeGrap">GPS Alt</a>
 				</div>
 				<div id="graph-lines7"></div>
 			</div>
 				
 			<div class="graph-container">
 				<div class="graph-info">
-					<a href="javascript:void(0)" class="returning">Trackangle</a>
+					<a href="javascript:void(0)" class="trackangleGraph">Trackangle</a>
 				</div>
 				<div id="graph-lines8"></div>
 			</div>
 			
 			<div class="graph-container">
 				<div class="graph-info">
-					<a href="javascript:void(0)" class="returning">gps_vs_fpm</a>
+					<a href="javascript:void(0)" class="gpsVsFpmGraph">gps_vs_fpm</a>
 				</div>
 				<div id="graph-lines9"></div>
 			</div>
@@ -457,7 +481,7 @@
 		  <div id="graph-wrapper4">
 			<div class="graph-container">
 				<div class="graph-info">
-					<a href="javascript:void(0)" class="returning">vert speed</a>
+					<a href="javascript:void(0)" class="vertSpeedGraph">vert speed</a>
 				</div>
 				<div id="graph-lines10"></div>
 			</div>
