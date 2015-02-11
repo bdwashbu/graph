@@ -116,11 +116,27 @@ http://vladimirkudinov.com
 }
 
 /* Colors For each Link */
-.graph-info .visitors { border-bottom: 2px solid #71c73e; }
-.graph-info .returning { border-bottom: 2px solid #77b7c5; }
+.graph-info .altitudeGraph { border-bottom: 2px solid #71c73e; }
+.graph-info .radAltGraph { border-bottom: 2px solid #77b7c5; }
+.graph-info .latGraph { border-bottom: 2px solid #c7943e; }
+.graph-info .lonGraph { border-bottom: 2px solid #943ec7; }
+.graph-info .ilsLocGraph { border-bottom: 2px solid #c73e71; }
+.graph-info .groundspeedGraph { border-bottom: 2px solid #3ec794; }
+.graph-info .gpsAltitudeGrap { border-bottom: 2px solid #3ec794; }
+.graph-info .trackangleGraph { border-bottom: 2px solid #c7503e; }
+.graph-info .gpsVsFpmGraph { border-bottom: 2px solid #b6c73e; }
+.graph-info .vertSpeedGraph { border-bottom: 2px solid #c73e72; }
 
-.graph-info .visitors:before { background: #71c73e; }
-.graph-info .returning:before { background: #77b7c5; }
+.graph-info .altitudeGraph:before { background: #71c73e; }
+.graph-info .radAltGraph:before { background: #77b7c5; }
+.graph-info .latGraph:before { background: #c7943e; }
+.graph-info .lonGraph:before { background: #943ec7; }
+.graph-info .ilsLocGraph:before { background: #c73e71; }
+.graph-info .groundspeedGraph:before { background: #3ec794; }
+.graph-info .gpsAltitudeGrap:before { background: #3ec794; }
+.graph-info .trackangleGraph:before { background: #c7503e; }
+.graph-info .gpsVsFpmGraph:before { background: #b6c73e; }
+.graph-info .vertSpeedGraph:before { background: #c73e72; }
 
 /* Lines & Bars Buttons */
 #lines, #lines2 {
