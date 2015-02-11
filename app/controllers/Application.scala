@@ -42,47 +42,43 @@ object Application extends Controller {
     
     var currentInfo = GraphData(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
     
-    for (command <- commands) {
-      //println("WHAAAAAT " + command)
-      var endIndex = 0
-      var endFound = false
-      for (x <- command) if (endFound == false) {
-         endIndex += 1
-         if (command.charAt(endIndex) == ')')
-           endFound = true
-      }
-      try {
-        if (command.size > 8) {
-          if (command.contains("Set_palt")) {
-              currentInfo.pressureAlt = command.subSequence(9, endIndex).toString.toFloat
-          } else if (command.contains("Set_ralt")) {
-              currentInfo.radioAltitude = command.subSequence(9, endIndex).toString.toFloat
-          } else if (command.contains("Set_gps.pos.lat")) {
-              currentInfo.gpsLatitude = command.subSequence(16, endIndex).toString.toFloat
-          } else if (command.contains("Set_gps.pos.lon")) {
-              currentInfo.gpsLongitude = command.subSequence(16, endIndex).toString.toFloat
-          } else if (command.contains("Set_ils.loc")) {
-              currentInfo.ilsLocation = command.subSequence(12, endIndex).toString.toFloat
-          } else if (command.contains("Set_gps.gs_knts")) {
-              currentInfo.groundSpeed = command.subSequence(16, endIndex).toString.toFloat
-          } else if (command.contains("Set_gps.gpsalt")) {
-              currentInfo.gpsAltitude = command.subSequence(15, endIndex).toString.toFloat
-          } else if (command.contains("Set_gps.trk")) {
-              currentInfo.trackAngle = command.subSequence(12, endIndex).toString.toFloat
-          } else if (command.contains("Set_gps.gps_vs_fpm")) {
-              currentInfo.gps_vs_fpm = command.subSequence(19, endIndex).toString.toFloat
-          } else if (command.contains("Set_bvs")) {
-              currentInfo.verticalSpeed = command.subSequence(8, endIndex).toString.toFloat
-          } else if (command.contains("Set_gps.meas_time")) {
-            results += currentInfo.copy()
-            timerCounter += 1
-          }
-       } 
-      } catch {
-           case ioe: NumberFormatException => println("BROKEN " + command)
-         }
+    for (row <- lines) {
+        for (command <- row.split(",").map(_.trim).filter(_.contains(')'))) {
+            var endIndex = 0
+            var endFound = false
+            for (x <- command) if (endFound == false) {
+               endIndex += 1
+               if (command.charAt(endIndex) == ')')
+                 endFound = true
+            }
+
+             if (command.size > 8) {
+                if (command.contains("Set_palt")) {
+                    currentInfo.pressureAlt = command.subSequence(9, endIndex).toString.toFloat
+                } else if (command.contains("Set_ralt")) {
+                    currentInfo.radioAltitude = command.subSequence(9, endIndex).toString.toFloat
+                } else if (command.contains("Set_gps.pos.lat")) {
+                    currentInfo.gpsLatitude = command.subSequence(16, endIndex).toString.toFloat
+                } else if (command.contains("Set_gps.pos.lon")) {
+                    currentInfo.gpsLongitude = command.subSequence(16, endIndex).toString.toFloat
+                } else if (command.contains("Set_ils.loc")) {
+                    currentInfo.ilsLocation = command.subSequence(12, endIndex).toString.toFloat
+                } else if (command.contains("Set_gps.gs_knts")) {
+                    currentInfo.groundSpeed = command.subSequence(16, endIndex).toString.toFloat
+                } else if (command.contains("Set_gps.gpsalt")) {
+                    currentInfo.gpsAltitude = command.subSequence(15, endIndex).toString.toFloat
+                } else if (command.contains("Set_gps.trk")) {
+                    currentInfo.trackAngle = command.subSequence(12, endIndex).toString.toFloat
+                } else if (command.contains("Set_gps.gps_vs_fpm")) {
+                    currentInfo.gps_vs_fpm = command.subSequence(19, endIndex).toString.toFloat
+                } else if (command.contains("Set_bvs")) {
+                    currentInfo.verticalSpeed = command.subSequence(8, endIndex).toString.toFloat
+                }
+             } 
+        }
+        results += currentInfo.copy() 
     }
-    
+          
      val finalResult = setString match {
        case "Set_palt" =>
             results.map(_.pressureAlt).foldLeft("")(_ + ", " + _)

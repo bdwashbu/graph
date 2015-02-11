@@ -219,7 +219,7 @@
 					        $.plot($(graphId), graphData, test);
 					        $(graphId).hide();
 					        bumpOffset(graphId, 500);
-					        $(graphId).fadeIn(400);
+					        $(graphId).fadeIn(200);
 				        },
 				        error: function(error) {
 				            ajaxError("AJAX 1:", error);
@@ -231,27 +231,46 @@
 				
 				  
 				if (jQuery(ui.item).find("a").size() == 1) {   
-					$('#graph-lines, #graph-lines2, #graph-lines3, #graph-lines4, #graph-lines5, #graph-lines6, #graph-lines7, #graph-lines8, #graph-lines9, #graph-lines10').fadeOut(400, function() {
+					var fadeOutSpeed = 200
+					$('#graph-lines').fadeOut(fadeOutSpeed, function() {
 						bumpOffset('#graph-lines', -500);
-						bumpOffset('#graph-lines2', -500);
-						bumpOffset('#graph-lines3', -500);
-						bumpOffset('#graph-lines4', -500);
-						bumpOffset('#graph-lines5', -500);
-						bumpOffset('#graph-lines6', -500);
-						bumpOffset('#graph-lines7', -500);
-						bumpOffset('#graph-lines8', -500);
-						bumpOffset('#graph-lines9', -500);
-						bumpOffset('#graph-lines10', -500);
 						jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_palt').ajax(ajaxCallBack('#graph-lines'));   
-					    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_ralt').ajax(ajaxCallBack('#graph-lines2'));
-					    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_gps.pos.lat').ajax(ajaxCallBack('#graph-lines3'));
-					    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_gps.pos.lon').ajax(ajaxCallBack('#graph-lines4'));
-					    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_ils.loc').ajax(ajaxCallBack('#graph-lines5'));
-					    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_gps.gs_knts').ajax(ajaxCallBack('#graph-lines6'));
-					    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_gps.gpsalt').ajax(ajaxCallBack('#graph-lines7'));
-					    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_gps.trk').ajax(ajaxCallBack('#graph-lines8'));
-					    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_gps.gps_vs_fpm').ajax(ajaxCallBack('#graph-lines9'));
-					    jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_bvs').ajax(ajaxCallBack('#graph-lines10'));
+					});
+					$('#graph-lines2').fadeOut(fadeOutSpeed, function() {
+						bumpOffset('#graph-lines2', -500);
+						jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_ralt').ajax(ajaxCallBack('#graph-lines2'));   
+					});
+					$('#graph-lines3').fadeOut(fadeOutSpeed, function() {
+						bumpOffset('#graph-lines3', -500);
+						jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_gps.pos.lat').ajax(ajaxCallBack('#graph-lines3'));   
+					});
+					$('#graph-lines4').fadeOut(fadeOutSpeed, function() {
+						bumpOffset('#graph-lines4', -500);
+						jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_gps.pos.lon').ajax(ajaxCallBack('#graph-lines4'));   
+					});
+					$('#graph-lines5').fadeOut(fadeOutSpeed, function() {
+						bumpOffset('#graph-lines5', -500);
+						jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_ils.loc').ajax(ajaxCallBack('#graph-lines5'));   
+					});
+					$('#graph-lines6').fadeOut(fadeOutSpeed, function() {
+						bumpOffset('#graph-lines6', -500);
+						jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_gps.gs_knts').ajax(ajaxCallBack('#graph-lines6'));   
+					});
+					$('#graph-lines7').fadeOut(fadeOutSpeed, function() {
+						bumpOffset('#graph-lines7', -500);
+						jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_gps.gpsalt').ajax(ajaxCallBack('#graph-lines7'));   
+					});
+					$('#graph-lines8').fadeOut(fadeOutSpeed, function() {
+						bumpOffset('#graph-lines8', -500);
+						jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_gps.trk').ajax(ajaxCallBack('#graph-lines8'));   
+					});
+					$('#graph-lines9').fadeOut(fadeOutSpeed, function() {
+						bumpOffset('#graph-lines9', -500);
+						jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_gps.gps_vs_fpm').ajax(ajaxCallBack('#graph-lines9'));   
+					});
+					$('#graph-lines10').fadeOut(fadeOutSpeed, function() {
+						bumpOffset('#graph-lines10', -500);
+						jsRoutes.controllers.Application.getGraphData(ui.item.text(), 'Set_bvs').ajax(ajaxCallBack('#graph-lines10'));   
 					});
 				}
 			}
@@ -286,7 +305,7 @@
 				},
 				xaxis: {
 					tickColor: '#DDDDDD',
-					ticks: 6,
+					ticks: 5,
 					font: {
 						 color: '#777777',
 					     size: 11,
@@ -297,7 +316,7 @@
 					}
 				},
 				yaxis: {
-					ticks: 6,
+					ticks: 5,
 					tickColor: '#DDDDDD',
 					font: {
 						 color: '#777777',
